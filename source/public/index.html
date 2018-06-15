@@ -1,0 +1,14 @@
+<div id="message"></div>
+
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="js/arduino-js.js"></script>
+
+<script>
+  var gVars = {};
+  var socket = io();
+  gVars.arduino = new arduino({board:'uno', socketio:socket});
+  gVars.arduino.onConnectAsClient(socket);
+  gVars.arduino.onStateChange(function(state) {
+    document.getElementById('message').innerHTML = JSON.stringify(state);
+  });
+</script>
